@@ -47,9 +47,7 @@
     margin-top:30px;
     margin-bottom:30px;
   }
-  footer{
-    text-align:center;
-  }
+  
   p{
       max-width: 80%;
   }

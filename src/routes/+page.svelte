@@ -1,8 +1,12 @@
-
+<script lang="ts">
+ export let data: PageData;
+ 
+ console.log(data)
+</script>
 
 <div class ="container">
-<form action="" method="POST">
-  <input type="text" name="user" placeholder="UserName" rows={1} required>
+<form action="?/getData" method="POST">
+  <input type="text" name="user" class="variant-filled-primary" placeholder="UserName" rows={1} required>
        <button class="btn variant-filled-primary"type="submit">Stalk</button>
 </form>
     </div>
