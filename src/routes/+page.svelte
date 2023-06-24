@@ -1,7 +1,9 @@
 <script lang="ts">
+
   import { Avatar } from '@skeletonlabs/skeleton';
  export let data: PageData;
- 
+
+  const company = data.user_info[0].company
 const location = data.user_info[0].location;
  const name = data.user_info[0].name;
  const bio = data.user_info[0].bio;
@@ -9,36 +11,83 @@ const location = data.user_info[0].location;
  const followers = data.user_info[0].followers;
 const following = data.user_info[0].following 
 const user = data.user_info[0].login
+  const blog = data.user_info[0].blog
+ const protocol = "http://" 
+const repos = data.user_info[0].public_repos
+  const repos_lists = data.user_info[0].repos_url
+  const gitHub = data.user_info[0].html_url
+import { onMount } from 'svelte';
   
-   
+  let mostUsedLanguage = '';
+    let topLanguages = [];
+
+  onMount(async () => {
+    try {
+      const response = await fetch(repos_lists);
+      const data = await response.json();
+      
+      const languageCounts = {};
+
+      data.forEach(repo => {
+        const language = repo.language;
+        if (language) {
+          if (languageCounts[language]) {
+            languageCounts[language]++;
+          } else {
+            languageCounts[language] = 1;
+          }
+        }
+      });
+       const sortedLanguages = Object.keys(languageCounts).sort((a, b) => {
+        return languageCounts[b] - languageCounts[a];
+      });
+
+      topLanguages = sortedLanguages.slice(0, 3);
+     
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }); 
  
-    
-  
 </script>
-<div class ="container">
+<div class ="container mx-auto">
 <form action="?/getData" method="POST">
-  <input type="text" name="user" class="variant-filled-primary" placeholder="UserName" rows={1} required>
+  <input type="text" name="user" class="variant-filled-primary placeholder-white" placeholder="UserName" rows={1} required>
        <button class="btn variant-filled-primary"type="submit">Stalk</button>
 </form>
     </div>
-<div class=" Box card w-[50%] mx-auto mt-20">
+<div class=" Box card w-[50%] mx-auto mt-10 p-2 rounded-lg">
   <div class="Card_container">
   <div class="First_col">
   <img src="{avatar}" alt="{avatar}" class="mt-5 mb-5" />
-      <p>{followers}</p>
-      <p>{following}</p>
+      <div class="flex flex-row">
+      <p class="mr-1 pb-0"><i class="fa-solid fa-users mr-2"></i>{followers} Followers</p>
+      <p>- {following} Following</p>
+        </div>
+        <p><i class="fa-solid fa-location-dot mr-2 pt-2 pb-0"></i>{location}</p>
+      <a href="{protocol + blog}" target="_blank"><i class="fa-solid fa-link mr-2 pt-2 pb-0"></i>Blog/Website</a>
+      <p><i class="fa-solid fa-building mr-2 pt-2 pb-0"></i>{company}</p>
       </div>
     <div class="Second_col">
         <h2 class="p-5 pb-0 font-bold ">{name}</h2>
         <h3 class="p-5 pt-2 pb-0 font-light">{user}</h3>
-        <h2 class="p-5 pt-2">{bio}</h2>
+        <h2 class="p-5 pt-2 pb-0">{bio}</h2>
+        <h3 class="p-5 pt-2 pb-0">Public Repos {repos}</h3>
+      <div class="flex flex-row">
+ <h3 class="p-5 pt-2 pb-0 font-bold">Most used languages</h3>
+
+      {#each topLanguages as language}
+          <p class="p-2">{language}</p>
+             {/each}
+          </div>
+        <a href="{gitHub}" class="p-5"><i class="fa-brands fa-github-alt mr-2 pt-2 pb-0"></i>View GitHub</a>
       </div>
   
 
+<i class="fa-solid fa-user-police"></i>
       </div>
 
 </div>
-
   <style>
   .container{
     display:flex;
@@ -56,23 +105,26 @@ const user = data.user_info[0].login
   }
   .Card_container{
     display:grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
+    grid-gap: 0rem;
   }
   .Second_col{
-    grid-col-start:2;
+    grid-col-start:3;
     grid-column: span 3;
   }
   .First_col{
     margin-left: 1rem;
      grid-row-start: 1;
-    grid-column-start: span 1;
+    grid-column: span 2;
   }
   .First_col img{
-    width:90px;
-    height:90px;
+    width: 90px;
+    height: 90px;
     border-radius:50%;
   }
-  
+ a:hover{
+    color:red;
+  } 
    
  @media (max-width: 992px) {
     button{
@@ -89,7 +141,14 @@ const user = data.user_info[0].login
       height:60px;
     }
     .Box{
-      width: 70%;
+      width: 60%;
+    }
+    .Card_container{
+grid-template-columns: repeat(1, 1fr);
+
+    }
+    .Second_col{
+      grid-col-start: 2;
     }
   }
 

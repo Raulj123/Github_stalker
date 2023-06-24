@@ -5,6 +5,7 @@
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	// Most of your app wide CSS should be put in this file
 	import '../app.postcss';
+  import '@fortawesome/fontawesome-free/css/all.css'
   import { AppBar, LightSwitch } from '@skeletonlabs/skeleton';
 </script>
   
@@ -13,7 +14,7 @@
 	<svelte:fragment slot="trail">Bars here</svelte:fragment>
 </AppBar>
 
-    <div class="container">
+    <div class="container mx-auto">
   <h1>Github stalker</h1>
 <img src="./stalker.png" alt="logo">
     <div class="container_second">
@@ -21,7 +22,7 @@
     </div>
     </div>
 <slot />
-
+<footer class="text-center mt-10 p-5">Made by Raul</footer>
 
 
 <style>
