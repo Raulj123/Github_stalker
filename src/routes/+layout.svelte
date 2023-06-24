@@ -15,7 +15,7 @@
 </AppBar>
 
     <div class="container mx-auto">
-  <h1>Github stalker</h1>
+  <h1 class="gradient-heading">Github stalker</h1>
 <img src="./stalker.png" alt="logo">
     <div class="container_second">
     <p class= "mt-5 mb-5 font-bold ">Enter a GitHub username, press 'Stalk,' and explore their profile stats and insights.</p>

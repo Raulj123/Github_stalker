@@ -18,18 +18,25 @@ const repos = data.user_info[0].public_repos
   const gitHub = data.user_info[0].html_url
 import { onMount } from 'svelte';
   
-  let mostUsedLanguage = '';
-    let topLanguages = [];
-
+ let maxStars = 0 
+      let mostLikedRepo = null
+let topLanguages =''
+let repo_name =''
   onMount(async () => {
     try {
       const response = await fetch(repos_lists);
       const data = await response.json();
       
       const languageCounts = {};
-
-      data.forEach(repo => {
+           data.forEach(repo => {
         const language = repo.language;
+        const stars = repo.stargazers_count;
+        const repo_name_of_most = repo.name;
+        if (stars > maxStars){
+          maxStars = stars
+          mostLikedRepo = repo;
+          repo_name = repo_name_of_most;
+        }
         if (language) {
           if (languageCounts[language]) {
             languageCounts[language]++;
@@ -43,6 +50,7 @@ import { onMount } from 'svelte';
       });
 
       topLanguages = sortedLanguages.slice(0, 3);
+      
      
     } catch (error) {
       console.error('Error:', error);
@@ -69,17 +77,24 @@ import { onMount } from 'svelte';
       <p><i class="fa-solid fa-building mr-2 pt-2 pb-0"></i>{company}</p>
       </div>
     <div class="Second_col">
-        <h2 class="p-5 pb-0 font-bold ">{name}</h2>
+        <h2 class="p-5 pb-0 font-bold gradient-sub">{name}</h2>
         <h3 class="p-5 pt-2 pb-0 font-light">{user}</h3>
         <h2 class="p-5 pt-2 pb-0">{bio}</h2>
-        <h3 class="p-5 pt-2 pb-0">Public Repos {repos}</h3>
-      <div class="flex flex-row">
- <h3 class="p-5 pt-2 pb-0 font-bold">Most used languages</h3>
-
+        <h3 class="p-5 pt-2 pb-0 font-bold">Public Repos {repos}</h3>
+      <div class="flex flex-row flex-wrap">
+ <h3 class="p-5 pt-2 pb-0 font-bold">Most used languages:</h3>
       {#each topLanguages as language}
           <p class="p-2">{language}</p>
              {/each}
           </div>
+        <div class="flex flex-row flex-wrap">
+        <h3 class="p-5 pt-2 pb-0 font-bold">Most Starred Repository: </h3>
+        <div class="flex flex-col">
+  <h3><i class=" p-3 fa-solid fa-star "></i>{maxStars}</h3>
+              <a href = "{mostLikedRepo}"class="p-5 pt-2 pb-0">{repo_name}</a>
+        </div>
+        </div>
+
         <a href="{gitHub}" class="p-5"><i class="fa-brands fa-github-alt mr-2 pt-2 pb-0"></i>View GitHub</a>
       </div>
   
