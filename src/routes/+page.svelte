@@ -1,8 +1,10 @@
 <script lang="ts">
 
-  import { Avatar } from '@skeletonlabs/skeleton';
+import { onMount } from 'svelte';
+
  export let data: PageData;
-const user_not_found = data.user_info[0].message; 
+const showMe = data.user_info[0].show;
+const user_not_found = data.user_info[0].message;
   const company = data.user_info[0].company
 const location = data.user_info[0].location;
  const name = data.user_info[0].name;
@@ -16,8 +18,6 @@ const user = data.user_info[0].login
 const repos = data.user_info[0].public_repos
   const repos_lists = data.user_info[0].repos_url
   const gitHub = data.user_info[0].html_url
-
-import { onMount } from 'svelte';
   
  let maxStars = 0 
       let mostLikedRepo = null
@@ -56,17 +56,17 @@ let repo_name =''
     } catch (error) {
       console.error('Error:', error);
     }
-  }); 
- 
+  });
+
 </script>
 
 <div class ="container mx-auto">
-<form action="?/getData" method="POST">
+<form action="?/getData" method="POST"> 
   <input type="text" name="user" class="variant-filled-primary placeholder-white" placeholder="UserName" rows={1} required>
        <button class="btn variant-filled-primary"type="submit">Stalk</button>
 </form>
     </div>
-{#if !user_not_found }
+{#if !user_not_found || showMe}
 <div class=" Box card w-[50%] mx-auto mt-10 p-2 rounded-lg">
   <div class="Card_container">
   <div class="First_col">
@@ -83,11 +83,11 @@ let repo_name =''
         <h2 class="p-5 pb-0 font-bold gradient-sub">{name}</h2>
         <h3 class="p-5 pt-2 pb-0 font-light">{user}</h3>
         <h2 class="p-5 pt-2 pb-0">{bio}</h2>
-        <h3 class="p-5 pt-2 pb-0 font-bold">Public Repos {repos}</h3>
+        <h3 class="p-5 pt-2 pb-0 font-bold">Public Repos: {repos}</h3>
       <div class="flex flex-row flex-wrap">
  <h3 class="p-5 pt-2 pb-0 font-bold">Most used languages:</h3>
       {#each topLanguages as language}
-          <p class="p-2">{language}</p>
+          <p class="p-2.5 gradient-p">{language}</p>
              {/each}
           </div>
         <div class="flex flex-row flex-wrap">
@@ -107,7 +107,9 @@ let repo_name =''
     <img src="./404.png">
     <h1 class="gradient-heading mt-2">User not found <i class="fa-solid fa-face-worried"></i></h1>
   </div>
+ 
 {/if}
+ 
   <style>
   .Error{
     display: flex;

@@ -16,7 +16,8 @@ export const user_info: any[] = [
 		followers: 4,
 		following: 1,
 		created_at: '2022-09-04T00:10:25Z',
-		updated_at: '2023-06-20T05:05:09Z'
+		updated_at: '2023-06-20T05:05:09Z',
+		show: 'Welcome to my profile!'
 	}
 ];
 import type { PageServerLoad } from './$types';
@@ -34,7 +35,6 @@ export const actions = {
 
 			const res = await fetch(url);
 			const user_data = await res.json();
-
 			user_info.splice(0);
 			user_info.push(user_data);
 			return user_data;
