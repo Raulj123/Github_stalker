@@ -2,7 +2,7 @@
 
   import { Avatar } from '@skeletonlabs/skeleton';
  export let data: PageData;
-
+const user_not_found = data.user_info[0].message; 
   const company = data.user_info[0].company
 const location = data.user_info[0].location;
  const name = data.user_info[0].name;
@@ -16,6 +16,7 @@ const user = data.user_info[0].login
 const repos = data.user_info[0].public_repos
   const repos_lists = data.user_info[0].repos_url
   const gitHub = data.user_info[0].html_url
+
 import { onMount } from 'svelte';
   
  let maxStars = 0 
@@ -58,12 +59,14 @@ let repo_name =''
   }); 
  
 </script>
+
 <div class ="container mx-auto">
 <form action="?/getData" method="POST">
   <input type="text" name="user" class="variant-filled-primary placeholder-white" placeholder="UserName" rows={1} required>
        <button class="btn variant-filled-primary"type="submit">Stalk</button>
 </form>
     </div>
+{#if !user_not_found }
 <div class=" Box card w-[50%] mx-auto mt-10 p-2 rounded-lg">
   <div class="Card_container">
   <div class="First_col">
@@ -97,13 +100,30 @@ let repo_name =''
 
         <a href="{gitHub}" class="p-5"><i class="fa-brands fa-github-alt mr-2 pt-2 pb-0"></i>View GitHub</a>
       </div>
-  
-
-<i class="fa-solid fa-user-police"></i>
-      </div>
-
+  </div>
 </div>
+{:else}
+<div class="Error">
+    <img src="./404.png">
+    <h1 class="gradient-heading mt-2">User not found <i class="fa-solid fa-face-worried"></i></h1>
+  </div>
+{/if}
   <style>
+  .Error{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right:auto;
+    margin-top: 40px;
+
+  }
+  .Error img{
+    border-radius: 50%;
+    height: 120px;
+    width:120px;
+  }
   .container{
     display:flex;
     justify-content:center;
