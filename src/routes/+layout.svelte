@@ -22,7 +22,7 @@
     </div>
     </div>
 <slot />
-<footer class="text-center mt-10 p-5">Made by Raul</footer>
+<footer class="text-center mt-10 p-5 gradient-p"><i class="fa-solid fa-copyright mr-2"></i>Raul 2023</footer>
 
 
 <style>
