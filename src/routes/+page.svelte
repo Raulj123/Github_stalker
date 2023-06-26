@@ -104,7 +104,7 @@ let repo_name =''
 </div>
 {:else}
 <div class="Error">
-    <img src="./404.png">
+    <img src="./404.png" alt="404">
     <h1 class="gradient-heading mt-2">User not found <i class="fa-solid fa-face-worried"></i></h1>
   </div>
  
@@ -170,9 +170,7 @@ let repo_name =''
     .container button{
       padding:9px; 
     }
-       .First_col h2 {
-      font-size: 0.9rem;
-    }
+    
     .First_col img{
       width: 60px;
       height:60px;

@@ -1,4 +1,5 @@
-export const user_info = [
+import type { PageServerLoad } from './$types';
+const user_info = [
 	{
 		avatar_url: 'https://avatars.githubusercontent.com/u/112786129?v=4',
 		url: 'https://api.github.com/users/Raulj123',
@@ -21,7 +22,6 @@ export const user_info = [
 		login: 'Raulj123'
 	}
 ];
-import type { PageServerLoad } from './$types';
 export const load: PageServerLoad = async () => {
 	return { user_info };
 };
@@ -43,4 +43,4 @@ export const actions = {
 			console.log('Error:', error);
 		}
 	}
-};
+} as const;
