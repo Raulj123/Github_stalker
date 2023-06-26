@@ -17,7 +17,8 @@ export const user_info: any[] = [
 		following: 1,
 		created_at: '2022-09-04T00:10:25Z',
 		updated_at: '2023-06-20T05:05:09Z',
-		show: 'Welcome to my profile!'
+		show: 'To show me blah',
+		login: 'Raulj123'
 	}
 ];
 import type { PageServerLoad } from './$types';

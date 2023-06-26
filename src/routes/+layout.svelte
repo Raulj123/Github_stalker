@@ -11,7 +11,6 @@
   
 <AppBar gridColumns="grid-cols-3" slotDefault="place-self-center" slotTrail="place-content-end">
 	<svelte:fragment slot="lead"><LightSwitch /></svelte:fragment>
-	<svelte:fragment slot="trail">Bars here</svelte:fragment>
 </AppBar>
 
     <div class="container mx-auto">

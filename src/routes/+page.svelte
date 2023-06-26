@@ -18,7 +18,9 @@ const user = data.user_info[0].login
 const repos = data.user_info[0].public_repos
   const repos_lists = data.user_info[0].repos_url
   const gitHub = data.user_info[0].html_url
-  
+ const created = data.user_info[0].created_at;
+const updated = data.user_info[0].updated_at;
+console.log(updated);
  let maxStars = 0 
       let mostLikedRepo = null
 let topLanguages =''
@@ -57,7 +59,7 @@ let repo_name =''
       console.error('Error:', error);
     }
   });
-
+console.log(user)
 </script>
 
 <div class ="container mx-auto">
@@ -71,7 +73,7 @@ let repo_name =''
   <div class="Card_container">
   <div class="First_col">
   <img src="{avatar}" alt="{avatar}" class="mt-5 mb-5" />
-      <div class="flex flex-row">
+      <div class="flex flex-row flex-wrap">
       <p class="mr-1 pb-0"><i class="fa-solid fa-users mr-2"></i>{followers} Followers</p>
       <p>- {following} Following</p>
         </div>
