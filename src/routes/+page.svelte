@@ -89,13 +89,13 @@ console.log(user)
       <div class="flex flex-row flex-wrap">
  <h3 class="p-5 pt-2 pb-0 font-bold">Most used languages:</h3>
       {#each topLanguages as language}
-          <p class="p-2.5 gradient-p">{language}</p>
+          <p class="p-2.5 gradient-p ml-2">{language}</p>
              {/each}
           </div>
         <div class="flex flex-row flex-wrap">
         <h3 class="p-5 pt-2 pb-0 font-bold">Most Starred Repository: </h3>
         <div class="flex flex-col">
-  <h3><i class=" p-3 fa-solid fa-star "></i>{maxStars}</h3>
+  <h3><i class=" p-3 fa-solid fa-star ml-2 "></i>{maxStars}</h3>
               <a href = "{mostLikedRepo}"class="p-5 pt-2 pb-0">{repo_name}</a>
         </div>
         </div>
