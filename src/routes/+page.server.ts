@@ -1,4 +1,4 @@
-export const user_info: any[] = [
+export const user_info = [
 	{
 		avatar_url: 'https://avatars.githubusercontent.com/u/112786129?v=4',
 		url: 'https://api.github.com/users/Raulj123',

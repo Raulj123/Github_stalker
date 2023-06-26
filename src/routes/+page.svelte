@@ -20,7 +20,6 @@ const repos = data.user_info[0].public_repos
   const gitHub = data.user_info[0].html_url
  const created = data.user_info[0].created_at;
 const updated = data.user_info[0].updated_at;
-console.log(updated);
  let maxStars = 0 
       let mostLikedRepo = null
 let topLanguages =''
@@ -59,7 +58,6 @@ let repo_name =''
       console.error('Error:', error);
     }
   });
-console.log(user)
 </script>
 
 <div class ="container mx-auto">
